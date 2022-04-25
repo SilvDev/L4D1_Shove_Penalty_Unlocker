@@ -18,7 +18,7 @@
 
 
 
-#define PLUGIN_VERSION 		"1.4"
+#define PLUGIN_VERSION 		"1.5"
 
 /*=======================================================================================
 	Plugin Info:
@@ -31,6 +31,9 @@
 
 ========================================================================================
 	Change Log:
+
+1.5 (25-Apr-2022)
+	- Fixed the plugin not initializing. Thanks to "Orinuse" for reporting.
 
 1.4 (01-Mar-2022)
 	- Removed unused code. Thanks to "Orinuse" for reporting.
@@ -137,6 +140,12 @@ public void OnPluginStart()
 
 	GetCvars();
 	g_hTimePenalty.AddChangeHook(ConVarChanged_Cvars);
+
+
+
+	// Patch
+	PatchAddress(true);
+	AddNormalSoundHook(HookSound_Callback);
 }
 
 public void OnPluginEnd()
